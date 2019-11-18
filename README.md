@@ -12,6 +12,9 @@ gulp prod-build
 ## tip
 该项目使用的是webpack4版本，配置项是基于vue-cli2的配置项构建，没有支持.vue文件，该框架只是一个轮廓，想要什么在项目中自行扩展
 
+webpack3-build、webpack3-config--这两个目录废弃
+
+
 ## babel7 配置注意事项
 * 项目根目录下新建/babel.config.js 配置项请使用本项目
 * 依赖简介
