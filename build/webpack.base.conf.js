@@ -13,7 +13,7 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
 // config variable(全局变量)
 const config = require('../config');
-const babelConf = require('../babel.config.js');
+// const babelConf = require('../babel.config.js');
 const isDev = process.env.NODE_ENV === 'development';
 // 处理路径的正则 \\双反向斜杠浏览器会返回这样的路径
 const pathREG = /[/|//|\\|\\\\]/g;

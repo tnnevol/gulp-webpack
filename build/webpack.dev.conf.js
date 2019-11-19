@@ -1,7 +1,8 @@
 'use strict';
 
-process.env.NODE_ENV = 'development';
-// console.log(process.env.NODE_ENV)
+// process.env.NODE_ENV = 'development';
+// console.log('dev', process.env.NODE_ENV)
+
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
@@ -17,7 +18,7 @@ module.exports = webpackMerge(webpackBaseConfig, {
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': process.env.NODE_ENV
+      'process.env.NODE_ENV': `${process.env.NODE_ENV}`
     }),
     // OccurrenceOrderPlugin is needed for webpack 1.x only
     new webpack.optimize.OccurrenceOrderPlugin(),

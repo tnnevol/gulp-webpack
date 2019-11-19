@@ -29,3 +29,7 @@ webpack3-build、webpack3-config--这两个目录废弃
     * @babel/register
     node 后续运行时所需要 require 进来的扩展名为 .es6、.es、.jsx、 .mjs 和 .js 的文件将由 Babel 自动转换。
 
+## express
+* 该项目没有使用webpack-dev-server作为服务启动，而是使用了express框架，这样有利于做ssr，也利于seo优化
+* [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) 该项目的代理使用了这个中间件
+

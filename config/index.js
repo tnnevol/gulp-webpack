@@ -2,6 +2,7 @@
 // webpack的全局配置项
 
 const path = require('path');
+const proxyConfig = require('./proxyConfig');
 
 const resolve = dir => {
   return path.join(__dirname, '..', dir);
@@ -19,9 +20,7 @@ module.exports = {
     assetsPublicPath: '/public/',
     assetsSuFilebDirectory: 'static',
     // 代理配置项
-    proxyTable: {
-
-    },
+    proxyTable: proxyConfig.proxy,
     host: '0.0.0.0',
     port: 9528,
     autoOpenBrowser: false,

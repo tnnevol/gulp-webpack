@@ -8,12 +8,13 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const routes = require('./routes');
-// const config = require('../config')
+const { processProxy } = require('./utils');
 const app = express();
 
 const webpackDevConfig = require('../build/webpack.dev.conf');
 const compiler = webpack(webpackDevConfig);
 const isDev = process.env.NODE_ENV === 'development';
+console.log('isDev', isDev);
 
 app.use(logger('dev'));
 // app.use(logger('combined'));
@@ -48,6 +49,8 @@ if (isDev) {
 
 // 路由配置
 routes(app);
+// 代理
+processProxy(app);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

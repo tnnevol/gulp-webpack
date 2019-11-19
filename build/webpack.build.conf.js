@@ -1,6 +1,7 @@
 'use strict';
 
-process.env.NODE_ENV = 'production';
+// process.env.NODE_ENV = 'production';
+// console.log(process.env.NODE_ENV)
 
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
@@ -22,7 +23,7 @@ module.exports = webpackMerge(webpackBaseConfig, {
       allChunks: true
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': process.env.NODE_ENV
+      'process.env.NODE_ENV': `${process.env.NODE_ENV}`
     }),
     new OptimizeCss({
       cssProcessor: require('cssnano'),

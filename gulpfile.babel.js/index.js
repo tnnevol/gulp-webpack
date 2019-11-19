@@ -6,10 +6,12 @@
 
 const { series } = require('gulp');
 
-const devServer = require('./dev.server');
+const server = require('./server');
 const build = require('./build');
 const clean = require('./clean');
 
-exports.devServer = series(devServer);
+exports.server = series(server);
 
 exports.build = series(clean, build);
+
+exports.deploy = series(clean, build, server);
