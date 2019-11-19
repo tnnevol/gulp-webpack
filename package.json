@@ -8,6 +8,7 @@
   "scripts": {
     "lint": "eslint --ext .js ./",
     "lint-fix": "eslint --fix --ext .js --ext .jsx ./",
+    "pm2:deploy": "cross-env NODE_ENV=production gulp build && pm2 start server/bin/www",
     "gulp:deploy": "cross-env NODE_ENV=production gulp deploy",
     "gulp:server": "cross-env NODE_ENV=development gulp server",
     "gulp:build": "cross-env NODE_ENV=production gulp build"
@@ -93,6 +94,7 @@
     "cookie-parser": "^1.4.4",
     "ejs": "^2.7.2",
     "express": "^4.17.1",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "pm2": "^4.1.2"
   }
 }

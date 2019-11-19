@@ -2,11 +2,23 @@
 author: newblue
 
 ```bash
+// eslint 规范提示
+yarn run lint
+
+// 使用 eslint代码风格
+yarn run lint-fix
+
 // 启动项目
-gulp dev-server
+yarn run gulp:server
 
 // 打包项目--用于正式服务器打包
-gulp prod-build
+yarn run gulp:build
+
+// 一键部署,无进程守护
+yarn run gulp:deploy
+
+// 一键部署,增加进程守护
+yarn run pm2:deploy
 ```
 
 ## tip
