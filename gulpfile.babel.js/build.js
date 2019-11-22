@@ -1,3 +1,6 @@
+// 懒到无敌，直接从vue-cli2中抄过来的，我没有走gulp的管道，不喜欢的，自己改一下
+// nodejs [DEP0097] 这个报错，是因为api废弃了，依赖问题直接使用node build 就不会报错了
+
 const ora = require('ora');
 const rm = require('rimraf');
 const path = require('path');
@@ -6,8 +9,15 @@ const webpack = require('webpack');
 const config = require('../config');
 const webpackConfig = require('../build/webpack.build.conf');
 
-const spinner = ora('building for production...');
 const build = cb => {
+  const spinner = ora({
+    text: chalk.blue('building for production...'),
+    spinner: {
+      interval: 80, // Optional
+      frames: ['.....', '+', '-']
+    }
+  });
+
   spinner.start();
   rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
     if (err) {

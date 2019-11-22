@@ -100,7 +100,7 @@ module.exports = {
         ]
       },
       { // ejs
-        test: /\.ejs/,
+        test: /\.ejs$/,
         use: [
           {
             loader: 'html-loader',
@@ -117,7 +117,7 @@ module.exports = {
         ]
       },
       { // less
-        test: /\.less|\.css$/,
+        test: /\.less$/,
         use: ExtractTextWebpackPlugin.extract({
           fallback: {
             loader: 'style-loader',
