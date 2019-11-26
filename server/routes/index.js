@@ -4,7 +4,7 @@ const routesArr = [
   {
     name: '/',
     routerName: 'index',
-    fileName: '/home'
+    fileName: '/index'
   }
 ];
 

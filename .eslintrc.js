@@ -15,6 +15,8 @@ module.exports = {
     'semi': ['error', 'always'],
     // 不允许使用==
     'eqeqeq': 2,
+
+    "import/no-webpack-loader-syntax": 0
   },
   // 检测ES6代码
   parserOptions: {

@@ -1,7 +1,10 @@
 const $http = require('axios');
 const config = require('../../config');
 const proxy = require('http-proxy-middleware');
+const ejs = require('ejs');
 const isDev = process.env.NODE_ENV === 'development';
+
+ejs.delimiter = '?';
 // console.log(`静态资源请求地址: http://${config.dev.host}:${config.dev.port}/`);
 
 const getTemplate = filename => {
@@ -22,5 +25,6 @@ const processProxy = app => {
 
 module.exports = {
   getTemplate,
-  processProxy
+  processProxy,
+  ejs
 };

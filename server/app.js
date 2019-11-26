@@ -14,7 +14,7 @@ const app = express();
 const webpackDevConfig = require('../build/webpack.dev.conf');
 const compiler = webpack(webpackDevConfig);
 const isDev = process.env.NODE_ENV === 'development';
-console.log('isDev', isDev);
+// console.log('isDev', isDev);
 
 app.use(logger('dev'));
 // app.use(logger('combined'));

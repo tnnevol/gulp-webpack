@@ -1,7 +1,25 @@
-.body{
-  width: 100%;
-  height: 100%;
-  .page{
-    background-color: aliceblue;
+@import "./common/index.less";
+.img-wrapper{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  .head-title{
+    text-align: center;
+    margin: 20px 0;
+    .logo{
+      width: 200px;
+    }
+  }
+  .logo-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    .logo{
+      width: 150px;
+    }
+    span{
+      margin: 0 20px;
+    }
   }
 }
