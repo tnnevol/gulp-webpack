@@ -1,7 +1,8 @@
 'use strict';
-
-// 项目的整个入口在src目录下，请勿修改
+// This uses a lot of es 6, es 7 syntax, please use a higher version of nodejs to compile
 // The entire entry of the project is in the src directory, please do not modify
+// 这里使用了很多的es6、es7的语法，请使用高版本的nodejs编译
+// 项目的整个入口在src目录下，请勿修改
 
 // node_modules
 const path = require('path');
@@ -9,7 +10,8 @@ const webpack = require('webpack');
 const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
 // config variable(全局变量)
 const config = require('../config');
@@ -26,15 +28,21 @@ const resolve = dir => {
 module.exports = {
   name: 'ejs',
   // 入口通过自调用函数会读取/src/js路径下的所有js文件
-  entry: (filePathList => {
-    const entry = {};
-    filePathList.forEach(_path => {
-      const splitPath = _path.split(pathREG);
-      const fileName = splitPath.slice(-1)[0].split('.')[0];
-      entry[fileName] = isDev ? [_path, 'webpack-hot-middleware/client?reload=true'] : _path;
-    });
-    return entry;
-  })(glob.sync(resolve(`${config.entry}/js/*.js`))),
+  entry: {
+    ...(filePathList => {
+      const entry = {};
+      filePathList.forEach(_path => {
+        const splitPath = _path.split(pathREG);
+        const fileName = splitPath.slice(-1)[0].split('.')[0];
+        entry[fileName] = isDev ? ['webpack-hot-middleware/client?reload=true', _path] : _path;
+      });
+      return entry;
+    })(glob.sync(resolve(`${config.entry}/js/*.js`)))
+  },
+  // 用于cdn的全局变量
+  externals: {
+    $: 'jQuery'
+  },
   // 输出js
   output: {
     path: config.build.assetsRoot, // 默认 dist
@@ -105,55 +113,32 @@ module.exports = {
           {
             loader: 'html-loader',
             options: {
-              attrs: ['img:src']
+              attrs: ['img:src'],
+              minimize: true
             }
           },
           {
             loader: 'ejs-html-loader',
             options: {
+              delimiter: '?',
               production: !isDev
             }
           }
         ]
       },
-      { // less
-        test: /\.less$/,
-        use: ExtractTextWebpackPlugin.extract({
-          fallback: {
-            loader: 'style-loader',
+      {
+        test: /\.(le|c)ss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
             options: {
-              singleton: true
+              hmr: isDev
             }
           },
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 2
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins: [
-                  require('postcss-cssnext')()
-                ]
-              }
-            },
-            // 可能有朋友会有搭建响应式的需求，这块需要用到 postcss-px2rem 或者 px2rem-loader 之类的插件
-            // 由于这类插件需要指定 remUnit 即设计图文件尺寸，我们可能需要分别打包 750px 和 1920px 的版本
-            // 如何让 px2rem-loader 分别识别两种版本并进行分离打包呢？
-            // 这边可以用到 loader 的另一种函数写法，其中 options.realResource 就是当前被处理文件的绝对路径
-            // 这边可以用样式文件夹来区分，如果是 /pc/ 文件夹下的样式文件，就使用 1920px 版本，否则使用 750px
-            /*
-                        ({ realResource }) => {
-                            return /\\pc\\/i.test(realResource) ? 'px2rem-loader?remUnit=192' : 'px2rem-loader?remUnit=75'
-                        },
-                        */
-            'less-loader'
-          ]
-        })
+          'css-loader',
+          'postcss-loader',
+          'less-loader'
+        ]
       }
     ]
   },

@@ -5,7 +5,8 @@
 
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
 const utils = require('./utils');
 const config = require('../config');
@@ -18,17 +19,19 @@ module.exports = webpackMerge(webpackBaseConfig, {
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': `${process.env.NODE_ENV}`
+      'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
     }),
     // OccurrenceOrderPlugin is needed for webpack 1.x only
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    // new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     // Use NoErrorsPlugin for webpack 1.x
     // new webpack.NoEmitOnErrorsPlugin(),
     // 抽出css
-    new ExtractTextWebpackPlugin({
-      filename: utils.assetsPath('css/[name].[hash:5].min.css'),
-      allChunks: true
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: utils.assetsPath('css/[name].css'), // devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: utils.assetsPath('css/[id].css') // devMode ? '[id].css' : '[id].[hash].css'
     })
   ],
 
