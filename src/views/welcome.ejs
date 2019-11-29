@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- title -->
-	<% include ./includes/title.ejs %>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta charset="utf-8"/>
+	<meta name="description" content="overview &amp; stats"/>
+	<title><??= title ?></title>
+	<? include ./includes/public_head_link.ejs ?>
 </head>
-<body>
-<div id="root">
-	<div class="trans-center">
-		<div class="welcome">welcome!</div>
-	</div>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+	<? include ./includes/public_header.ejs ?>
+	<main class="layui-main">
+		<? include ./includes/public_l_aside.ejs ?>
+		<section class="layui-body">
+			<div id="root">
+				<div class="trans-center">
+					<div class="welcome">welcome!</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<? include ./includes/public_footer.ejs ?>
 </div>
+
+<? include ./includes/public_body_link.ejs ?>
 </body>
 </html>

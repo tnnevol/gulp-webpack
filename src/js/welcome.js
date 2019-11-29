@@ -1,3 +1,4 @@
-import '_less/index.less';
-const arr = [1, 2, 4, 5];
-console.log(arr.includes(1));
+import './lib/common';
+import '_less/welcome.less';
+/* 这里只是为了监听ejs这个文件 */
+import 'raw-loader!@/views/welcome.ejs';

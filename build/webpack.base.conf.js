@@ -40,9 +40,9 @@ module.exports = {
     })(glob.sync(resolve(`${config.entry}/js/*.js`)))
   },
   // 用于cdn的全局变量
-  externals: {
-    $: 'jQuery'
-  },
+  // externals: {
+  //   $: 'jQuery'
+  // },
   // 输出js
   output: {
     path: config.build.assetsRoot, // 默认 dist
@@ -63,7 +63,7 @@ module.exports = {
     rules: [
       { // js
         test: /\.js$/,
-        exclude: /(node_modules|bower_components|lib|libs)/,
+        exclude: /(node_modules|bower_components)/,
         enforce: 'pre',
         include: [resolve('src'), resolve('test')],
         use: ['babel-loader']
@@ -145,7 +145,6 @@ module.exports = {
   plugins: [
     // 定义全局变量，定义后不再需要import或require
     new webpack.ProvidePlugin({
-
     }),
 
     // html 输出

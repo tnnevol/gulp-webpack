@@ -4,6 +4,7 @@ const proxy = require('http-proxy-middleware');
 const ejs = require('ejs');
 const isDev = process.env.NODE_ENV === 'development';
 
+// 设置ejs
 ejs.delimiter = '?';
 // console.log(`静态资源请求地址: http://${config.dev.host}:${config.dev.port}/`);
 

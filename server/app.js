@@ -7,6 +7,8 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
+const { getTemplate, ejs } = require('./utils');
+
 const routes = require('./routes');
 const { processProxy } = require('./utils');
 const app = express();
@@ -53,8 +55,15 @@ routes(app);
 processProxy(app);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  next(createError(404));
+app.use(async (req, res, next) => {
+  try {
+    // await render(res, 'home', { title: '首页' })
+    const template = await getTemplate('404.ejs'); // 获取 ejs 模板文件
+    const html = ejs.render(template, { title: '404' });
+    return res.status(200).send(html);
+  } catch (e) {
+    next(e);
+  }
 });
 
 // error handler

@@ -5,6 +5,11 @@ const routesArr = [
     name: '/',
     routerName: 'index',
     fileName: '/index'
+  },
+  {
+    name: '/welcome',
+    routerName: 'index',
+    fileName: '/welcome'
   }
 ];
 
