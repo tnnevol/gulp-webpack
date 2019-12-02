@@ -136,8 +136,8 @@ module.exports = {
             }
           },
           'css-loader',
-          'postcss-loader',
-          'less-loader'
+          'less-loader',
+          'postcss-loader'
         ]
       }
     ]
@@ -159,7 +159,7 @@ module.exports = {
         filename: `${fileName}.ejs`, // resolve(),
         hash: true, // 为了更好的 cache，可以在文件名后加个 hash。
         cache: false,
-        meta: { viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no' },
+        meta: { viewport: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no' },
         favicon: resolve('favicon.ico'),
         chunks
       });

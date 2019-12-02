@@ -1,3 +1,4 @@
+// import 'amfe-flexible'; // 暂时不用，会用的自行解封 ☠
 import { loadLayuiModule } from '@/utils/index';
 
 // 注意：导航 依赖 element 模块，否则无法进行功能性操作
