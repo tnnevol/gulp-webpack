@@ -10,6 +10,11 @@ const routesArr = [
     name: '/welcome',
     routerName: 'index',
     fileName: '/welcome'
+  },
+  {
+    name: '/map',
+    routerName: 'index',
+    fileName: '/map'
   }
 ];
 

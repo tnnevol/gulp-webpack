@@ -7,7 +7,8 @@ $(() => {
     const [element] = await loadLayuiModule(['element']);
     const headerNavsMapping = {
       index: ['/'],
-      welcome: ['/welcome', '/welcome/']
+      welcome: ['/welcome', '/welcome/'],
+      LMap: ['/map', '/map/']
     };
     setNavsActive('#pageHeader .layui-layout-left ', headerNavsMapping);
   })(window);
