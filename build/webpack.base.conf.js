@@ -11,11 +11,9 @@ const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
 // config variable(全局变量)
 const config = require('../config');
-// const babelConf = require('../babel.config.js');
 const isDev = process.env.NODE_ENV === 'development';
 // 处理路径的正则 \\双反向斜杠浏览器会返回这样的路径
 const pathREG = /[/|//|\\|\\\\]/g;
@@ -52,6 +50,8 @@ module.exports = {
   },
   // 路径超级变量
   resolve: {
+    // require时不添加后缀名从该数组中查找后缀名匹配
+    extensions: ['.js', '.ejs', '.json'],
     alias: {
       '@': resolve(config.entry),
       _js: resolve(`${config.entry}/js`),
@@ -69,19 +69,39 @@ module.exports = {
         use: ['babel-loader']
       },
       { // img
-        test: /\.(png|jpg|jpeg|gif)$/,
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         use: [
           {
             loader: 'url-loader',
             options: {
-              name: '[name].[hash:5].[ext]',
-              limit: 1000,
-              outputPath: 'static/img'
+              name: 'static/img/[name].[hash:5].[ext]',
+              limit: 1000
             }
           },
           {
             // 图片压缩工具
-            loader: 'image-webpack-loader'
+            loader: 'img-loader',
+            options: {
+              plugins: [
+                require('imagemin-gifsicle')({
+                  interlaced: false
+                }),
+                /* require('imagemin-mozjpeg')({
+                  progressive: true,
+                  arithmetic: false
+                }), */
+                require('imagemin-pngquant')({
+                  floyd: 0.5,
+                  speed: 2
+                }),
+                require('imagemin-svgo')({
+                  plugins: [
+                    { removeTitle: true },
+                    { convertPathData: false }
+                  ]
+                })
+              ]
+            }
           }
         ]
       },
@@ -136,8 +156,8 @@ module.exports = {
             }
           },
           'css-loader',
-          'less-loader',
-          'postcss-loader'
+          'postcss-loader',
+          'less-loader'
         ]
       }
     ]

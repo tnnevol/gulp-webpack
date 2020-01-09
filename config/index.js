@@ -22,7 +22,7 @@ module.exports = {
     // 代理配置项
     proxyTable: proxyConfig.proxy,
     host: '0.0.0.0',
-    port: 80,
+    port: 8686,
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

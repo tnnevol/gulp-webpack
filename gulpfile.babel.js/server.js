@@ -3,15 +3,13 @@ const path = require('path');
 
 // const config = require('../config');
 
-const server = cb => {
+const server = done => {
   nodemon({
     script: path.join(__dirname, '../server/bin/www'), // run ES5 code
     watch: path.resolve(__dirname, '../server'), // watch ES2015 code
     tasks: ['compile'], // compile synchronously onChange
     // env: { NODE_ENV: '"development"' },
-    done () {
-      cb();
-    }
+    done
   });
 };
 module.exports = server;

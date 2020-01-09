@@ -6,6 +6,7 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 // const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
 const utils = require('./utils');
@@ -32,6 +33,16 @@ module.exports = webpackMerge(webpackBaseConfig, {
       // both options are optional
       filename: utils.assetsPath('css/[name].css'), // devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: utils.assetsPath('css/[id].css') // devMode ? '[id].css' : '[id].[hash].css'
+    }),
+    new FriendlyErrorsPlugin({
+      compilationSuccessInfo: {
+        messages: [
+          `Your application is running here: http://${config.dev.host}:${config.dev.port}`,
+          `or running here: http://127.0.0.1:${config.dev.port}`]
+      },
+      onErrors: config.dev.notifyOnErrors
+        ? utils.createNotifierCallback()
+        : undefined
     })
   ],
 
