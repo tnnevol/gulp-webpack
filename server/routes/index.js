@@ -1,5 +1,4 @@
-const path = require('path');
-
+// const path = require('path');
 const routesArr = [
   {
     name: '/',
@@ -17,10 +16,10 @@ const routesArr = [
     fileName: '/map'
   }
 ];
-
+// path.join(__dirname, `.${router.fileName}/${router.routerName}`)
 const routes = (app) => {
   for (const router of routesArr.values()) {
-    app.use(router.name, require(path.resolve(__dirname, `.${router.fileName}/${router.routerName}`)));
+    app.use(router.name, require(`.${router.fileName}/${router.routerName}`));
   }
 };
 

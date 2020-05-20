@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+'use strict';
 
 /**
  * Module dependencies.
@@ -11,7 +11,6 @@ const http = require('http');
 /**
  * Get port from environment and store in Express.
  */
-
 const port = normalizePort(process.env.PORT || config.dev.port);
 app.set('port', port);
 

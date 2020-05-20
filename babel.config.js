@@ -13,5 +13,7 @@ const plugins = [
 ];
 module.exports = {
   presets,
-  plugins
+  plugins,
+  // Cannot assign to read only property 'exports' of object '#<Object>'
+  sourceType: 'unambiguous'
 };
