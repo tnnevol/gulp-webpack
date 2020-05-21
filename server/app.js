@@ -27,10 +27,10 @@ if (isDev) {
   app.use(express.static(path.join(__dirname, '../dist')));
 }
 
-// 路由配置
-require('./routes')(app);
 // 代理
 processProxy(app);
+// 路由配置
+require('./routes')(app);
 
 // catch 404 and forward to error handler
 app.use(async (req, res, next) => {

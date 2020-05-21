@@ -20,5 +20,6 @@ module.exports = function (app) {
     publicPath: webpackDevConfig.output.publicPath
   }));
   // 指定开发环境下的静态资源目录
-  app.use(webpackDevConfig.output.publicPath, express.static(path.join(__dirname, '../src')));
+  // app.use(webpackDevConfig.output.publicPath, express.static(path.join(__dirname, '../src')));
+  app.use(express.static(path.join(__dirname, '../server/public')));
 };
